@@ -156,8 +156,17 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BaseViewModel.cs" />
+    <Compile Include="ViewModel\CustomerViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\StaffViewModel.cs" />
+    <Compile Include="ViewModel\ViewModelCommand.cs" />
+    <Compile Include="View\CustomerView.xaml.cs">
+      <DependentUpon>CustomerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\StaffView.xaml.cs">
+      <DependentUpon>StaffView.xaml</DependentUpon>
+    </Compile>
     <Page Include="LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -179,6 +188,14 @@
       <Generator>XamlIntelliSenseFileGenerator</Generator>
     </Page>
     <Page Include="ResourceXAML\MainResource.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CustomerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\StaffView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
