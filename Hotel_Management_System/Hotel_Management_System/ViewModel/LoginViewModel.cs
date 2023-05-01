@@ -46,7 +46,7 @@ namespace Hotel_Management_System.ViewModel
             else
             {
                 IsLogin = false;
-                //MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("Sai tài khoản hoặc mật khẩu!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
     }
