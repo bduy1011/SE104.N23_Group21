@@ -9,7 +9,6 @@
 
 namespace Hotel_Management_System.Model
 {
-    using Hotel_Management_System.ViewModel;
     using Hotel_Management_System.ViewModel.Other;
     using System;
     using System.Collections.Generic;
@@ -24,29 +23,29 @@ namespace Hotel_Management_System.Model
             this.PHIEUDATPHONGs = new HashSet<PHIEUDATPHONG>();
         }
 
-        private string _STT;
+        private string _stt;
         private string _maKhachHang;
         private string _tenKhachHang;
         private string _CCCD;
         private string _gioiTinh;
         private Nullable<System.DateTime> _ngaySinh;
-        private string _SDT;
-        private string _email;
+        private string _soDienThoai;
         private string _loaiKhachHang;
+        private string _trangThai;
         private bool _isLastRow;
 
         public string Character { get; set; }
         public Brush BgColor { get; set; }
+        public string STT { get => _stt; set { _stt = value; OnPropertyChanged(); } }
         public string MaKhachHang { get => _maKhachHang; set { _maKhachHang = value; OnPropertyChanged(); } }
         public string TenKhachHang { get => _tenKhachHang; set { _tenKhachHang = value; OnPropertyChanged(); } }
         public string CCCD { get => _CCCD; set { _CCCD = value; OnPropertyChanged(); } }
         public string GioiTinh { get => _gioiTinh; set { _gioiTinh = value; OnPropertyChanged(); } }
         public Nullable<System.DateTime> NgaySinh { get => _ngaySinh; set { _ngaySinh = value; OnPropertyChanged(); } }
-        public string SDT { get => _SDT; set { _SDT = value; OnPropertyChanged(); } }
-        public string Email { get => _email; set { _email = value; OnPropertyChanged(); } }
+        public string SoDienThoai { get => _soDienThoai; set { _soDienThoai = value; OnPropertyChanged(); } }
         public string LoaiKhachHang { get => _loaiKhachHang; set { _loaiKhachHang = value; OnPropertyChanged(); } }
+        public string TrangThai { get => _trangThai; set { _trangThai = value; OnPropertyChanged(); } }
         public bool IsLastRow { get => _isLastRow; set { _isLastRow = value; OnPropertyChanged(); } }
-        public string STT { get => _STT; set { _STT = value; OnPropertyChanged(); } }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<HOADON> HOADONs { get; set; }

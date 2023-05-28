@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Hotel_Management_System.View.BookingRoomView
 {
@@ -39,6 +40,29 @@ namespace Hotel_Management_System.View.BookingRoomView
             else
             {
                 countDayTextBox.Text = "#";
+            }
+        }
+
+        private void TextBox_PreviewTextInput2(object sender, TextCompositionEventArgs e)
+        {
+            e.Handled = !IsNumeric2(e.Text);
+        }
+
+        private bool IsNumeric2(string text)
+        {
+            // Kiểm tra xem chuỗi có chứa toàn số hay không
+            return int.TryParse(text, out int result);
+        }
+
+        private void TextBox_PreviewKeyUp(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Back && ((System.Windows.Controls.TextBox)sender).Text.Length == 1)
+            {
+                ((System.Windows.Controls.TextBox)sender).Text = "0";
+            }
+            else if (((System.Windows.Controls.TextBox) sender).Text == "0")
+            {
+                ((System.Windows.Controls.TextBox)sender).Text = "";
             }
         }
     }

@@ -84,13 +84,13 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                         {
                             MaKhachHang = item.MaKhachHang,
                             Character = item.TenKhachHang.ToString().Substring(0, 1),
-                            BgColor = brushList((int.Parse(item.MaKhachHang.Split('H')[1]))),
+                            BgColor = brushList((int.Parse(item.MaKhachHang.Substring(2)))),
                             TenKhachHang = item.TenKhachHang,
                             GioiTinh = item.GioiTinh,
                             NgaySinh = item.NgaySinh,
                             CCCD = item.CCCD,
-                            Email = item.Email,
-                            SDT = item.SDT
+                            LoaiKhachHang = item.LoaiKhachHang,
+                            SoDienThoai = item.SoDienThoai
                         });
                     }
                     tmpCustomers = customers;
@@ -116,8 +116,8 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                         x.MaKhachHang.ToString().Contains(p.Text) ||
                         x.TenKhachHang.Contains(p.Text) ||
                         x.CCCD.Contains(p.Text) ||
-                        x.Email.Contains(p.Text) ||
-                        x.SDT.Contains(p.Text)
+                        x.LoaiKhachHang.Contains(p.Text) ||
+                        x.SoDienThoai.Contains(p.Text)
                     );
 
                     customers = new ObservableCollection<KHACHHANG>();
@@ -128,13 +128,13 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                         {
                             MaKhachHang = item.MaKhachHang,
                             Character = item.TenKhachHang.ToString().Substring(0, 1),
-                            BgColor = brushList((int.Parse(item.MaKhachHang.Split('H')[1]))),
+                            BgColor = brushList((int.Parse(item.MaKhachHang.Substring(2)))),
                             TenKhachHang = item.TenKhachHang,
                             GioiTinh = item.GioiTinh,
                             NgaySinh = item.NgaySinh,
                             CCCD = item.CCCD,
-                            Email = item.Email,
-                            SDT = item.SDT
+                            LoaiKhachHang = item.LoaiKhachHang,
+                            SoDienThoai = item.SoDienThoai
                         });
                     }
                 }
@@ -200,8 +200,8 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                 customerToFind.CCCD = customer.CCCD;
                 customerToFind.GioiTinh = customer.GioiTinh;
                 customerToFind.NgaySinh = customer.NgaySinh;
-                customerToFind.SDT = customer.SDT;
-                customerToFind.Email = customer.Email;
+                customerToFind.SoDienThoai = customer.SoDienThoai;
+                customerToFind.LoaiKhachHang = customer.LoaiKhachHang;
                 MessageBox.Show("Cập nhật thông tin thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
@@ -221,13 +221,13 @@ namespace Hotel_Management_System.ViewModel.CustomerViewModel
                 {
                     MaKhachHang = item.MaKhachHang,
                     Character = item.TenKhachHang.ToString().Substring(0, 1),
-                    BgColor = brushList((int.Parse(item.MaKhachHang.Split('H')[1]))),
+                    BgColor = brushList((int.Parse(item.MaKhachHang.Substring(2)))),
                     TenKhachHang = item.TenKhachHang,
                     GioiTinh = item.GioiTinh,
                     NgaySinh = item.NgaySinh,
                     CCCD = item.CCCD,
-                    Email = item.Email,
-                    SDT = item.SDT
+                    LoaiKhachHang = item.LoaiKhachHang,
+                    SoDienThoai = item.SoDienThoai
                 });
             }
             MessageBox.Show("Xóa thành công", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
