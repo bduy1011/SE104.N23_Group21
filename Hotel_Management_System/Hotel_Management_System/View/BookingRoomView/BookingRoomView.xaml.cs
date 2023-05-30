@@ -12,7 +12,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Hotel_Management_System.View.BookingRoomView
 {
@@ -24,23 +23,6 @@ namespace Hotel_Management_System.View.BookingRoomView
         public BookingRoomView()
         {
             InitializeComponent();
-        }
-
-        private void ngayDiDatePicker_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
-        {
-            DateTime? ngayDen = ngayDenDatePicker.SelectedDate;
-            DateTime? ngayDi = ngayDiDatePicker.SelectedDate;
-
-            if (ngayDen != null && ngayDi != null && ngayDi >= ngayDen)
-            {
-                gioDiTextBlock.Text = "12:00";
-                int countDay = (ngayDi.Value - ngayDen.Value).Days;
-                countDayTextBox.Text = string.Format("{0} đêm", ++countDay);
-            }
-            else
-            {
-                countDayTextBox.Text = "#";
-            }
         }
 
         private void TextBox_PreviewTextInput2(object sender, TextCompositionEventArgs e)
@@ -60,7 +42,7 @@ namespace Hotel_Management_System.View.BookingRoomView
             {
                 ((System.Windows.Controls.TextBox)sender).Text = "0";
             }
-            else if (((System.Windows.Controls.TextBox) sender).Text == "0")
+            else if (((System.Windows.Controls.TextBox)sender).Text == "0" && e.Key >= Key.D0 && e.Key <= Key.D9)
             {
                 ((System.Windows.Controls.TextBox)sender).Text = "";
             }

@@ -5,6 +5,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -164,6 +165,8 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
         private string _completelyPayment;
         private string _downPayment;
         private string _discount;
+        private double _countDay;
+        private string _timeReservation;
 
         public string RemainingCosts
         {
@@ -231,6 +234,31 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             }
         }
 
+        public double CountDay
+        {
+            get { return _countDay; }
+            set
+            {
+                if (_countDay != value)
+                {
+                    _countDay = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public string TimeReservation
+        {
+            get { return _timeReservation; }
+            set
+            {
+                if (_timeReservation != value)
+                {
+                    _timeReservation = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand LoadedServicesCommand { get; set; }
@@ -242,24 +270,25 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
         public ICommand RemoveSelectedServiceCommand { get; set; }
         public ICommand RemoveCustomerCommand { get; set; }
         public ICommand MoneyTextChangedCommand { get; set; }
-        public ICommand AmountTextChangedCommand { get; set; }
+        public ICommand AmountOfSelectedServicesTextChangedCommand { get; set; }
+        public ICommand DateOfDepartmentSelectedDateChangedCommand { get; set; }
         public ICommand SearchServicesCommand { get; set; }
         public ICommand SearchCommoditysCommand { get; set; }
         public ICommand BackCommand { get; set; }
         public ICommand BookingRoomCommand { get; set; }
 
-
         public BookingRoomViewModel(PHONG room) : this()
         {
             Room = room;
-            //RoomFee = Room.LOAIPHONG.DonGia.ToString();
-            RoomFee = "500000";
+            RoomFee = "0";
             SumFee = RoomFee;
             RemainingCosts = RoomFee;
             ServicesFee = "0";
             Discount = "";
             DownPayment = "";
             CompletelyPayment = "0";
+            TimeReservation = "#";
+            CountDay = 0;
         }
 
         public BookingRoomViewModel()
@@ -285,11 +314,14 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 }
                 else UsageBill.MaPhieuSuDung = "PSD10001";
 
-                ReservationBill.NgayLap = DateTime.Now;
-                ReservationBill.NgayDen = DateTime.UtcNow;
+                // Thiết lập thông tin phiếu đặt phòng
                 ReservationBill.MaPhieuSuDung = UsageBill.MaPhieuSuDung;
+                ReservationBill.MaPhong = Room.MaPhong;
+                ReservationBill.NgayDen = DateTime.Now;
+                ReservationBill.NgayLap = DateTime.Now;
 
-                //ReservationBill
+                // Thiết lập thông tin phiếu sử dụng
+                UsageBill.NgayLap = ReservationBill.NgayLap;
 
                 SelectedServices = new ObservableCollection<CT_PHIEUDICHVU>();
 
@@ -305,7 +337,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
 
                 KHACHHANG kh = new KHACHHANG();
 
-                string temp = "";
+                string temp;
                 try
                 {
                     temp = DataProvider.Ins.DB.KHACHHANGs.OrderByDescending(cus => cus.MaKhachHang).FirstOrDefault().MaKhachHang;
@@ -429,18 +461,10 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
 
             MoneyTextChangedCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
-                int sumFee = int.Parse(SumFee);
-                int discount;
-                int downPayment;
-                try { discount = int.Parse(Discount); } catch { discount = 0; };
-                try { downPayment = int.Parse(DownPayment); } catch { downPayment = 0; };
-                int completelyPayment = discount + downPayment;
-                CompletelyPayment = completelyPayment.ToString();
-                int remainingCosts = sumFee - completelyPayment;
-                RemainingCosts = remainingCosts.ToString();
+                UpdateFee(SelectedServices, SelectedCommoditys);
             });
 
-            AmountTextChangedCommand = new RelayCommand<CT_PHIEUDICHVU>((p) => { return true; }, (p) =>
+            AmountOfSelectedServicesTextChangedCommand = new RelayCommand<CT_PHIEUDICHVU>((p) => { return true; }, (p) =>
             {
                 if (p.MaDichVu.Contains("DV"))
                 {
@@ -459,10 +483,39 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                     {
                         if (item.MaHangHoa == p.MaDichVu)
                         {
+                            item.SoLuong = p.SoLuong;
                             item.ThanhTien = item.SoLuong * item.HANGHOA.DonGiaBan;
                             p.ThanhTien = item.ThanhTien;
                         }
                     }
+                }
+                UpdateFee(SelectedServices, SelectedCommoditys);
+            });
+
+            DateOfDepartmentSelectedDateChangedCommand = new RelayCommand<TextBox>((p) => { return true; }, (p) =>
+            {
+                if (ReservationBill.NgayDi >= ReservationBill.NgayDen)
+                {
+                    CountDay = (ReservationBill.NgayDi.Value.Date - ReservationBill.NgayDen.Value.Date).Days;
+                    if (ReservationBill.NgayDen.Value.Hour >= 0 && ReservationBill.NgayDen.Value.Hour < 7)
+                    {
+                        // Thuê phòng khoảng từ 0 giờ - 7 giờ sáng và ở đến 12 giờ trưa cùng ngày được tính là 1 đêm
+                        CountDay += 1;
+                    }
+                    else if (ReservationBill.NgayDen.Value.Hour >= 7 && ReservationBill.NgayDen.Value.Hour < 12)
+                    {
+                        // Phụ thu thêm số tiền = 1/4 giá thuê phòng 1 đêm
+                        CountDay += 0.25;
+                    }
+                    if (CountDay == Math.Floor(CountDay)) TimeReservation = String.Format("{0} đêm", CountDay);
+                    else TimeReservation = String.Format("{0} đêm có phụ thu", Math.Floor(CountDay));
+                    RoomFee = (CountDay * Room.LOAIPHONG.DonGia).ToString();
+                }
+                else 
+                { 
+                    CountDay = 0;
+                    RoomFee = "0";
+                    TimeReservation = "#";
                 }
                 UpdateFee(SelectedServices, SelectedCommoditys);
             });
@@ -513,10 +566,6 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 }
             });
 
-            BackCommand = new RelayCommand<BookingRoomView>((p) => { return true; }, (p) => { p.Close(); });
-
-            BookingRoomCommand = new RelayCommand<BookingRoomView>((p) => { return true; }, (p) => { p.Close(); });
-
             LoadedAddCustomerCommand = new RelayCommand<DataGrid>((p) => { return true; }, (p) =>
             {
                 for (int i = 0; i < AddCustomers.Count; i++)
@@ -534,7 +583,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             {
                 KHACHHANG kh = new KHACHHANG();
 
-                string temp = "";
+                string temp;
                 try
                 {
                     temp = AddCustomers[AddCustomers.Count - 1].MaKhachHang;
@@ -559,7 +608,7 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                     }
                 }
                 string temp = DataProvider.Ins.DB.KHACHHANGs.OrderByDescending(cus => cus.MaKhachHang).FirstOrDefault().MaKhachHang;
-                AddCustomers[0].MaKhachHang = "KH" + (int.Parse(temp.Substring(2) + 1)).ToString();
+                AddCustomers[0].MaKhachHang = "KH" + (int.Parse(temp.Substring(2)) + 1).ToString();
                 for (int i = 0; i < AddCustomers.Count; i++)
                 {
                     var item = AddCustomers[i];
@@ -569,31 +618,52 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
                 }
             });
 
-            BookingRoomCommand = new RelayCommand<KHACHHANG>((p) => { return true; }, (p) =>
+            BackCommand = new RelayCommand<BookingRoomView>((p) => { return true; }, (p) => { p.Close(); });
+            
+            BookingRoomCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 foreach (var item in AddCustomers)
                 {
+                    // Chưa check khách hàng trùng lặp
                     ReservationBill.KHACHHANGs.Add(item);
                 }
 
                 UsageBill.TriGia = int.Parse(ServicesFee);
+                UsageBill.TrangThai = "Chưa giao";
 
+                ReservationBill.DonGia = int.Parse(RoomFee); 
+                ReservationBill.TienCoc = int.Parse(DownPayment);
+                ReservationBill.SoNguoi = (short)ReservationBill.KHACHHANGs.Count();
+                //ReservationBill.TrangThai = ???
 
-                //DataProvider.Ins.DB.CT_PHIEUDICHVU.AddRange(SelectedServices);
-                DataProvider.Ins.DB.CT_PHIEUHANGHOA.AddRange(SelectedCommoditys);
+                Room.TrangThai = "Được đặt";
+
                 DataProvider.Ins.DB.PHIEUSUDUNGs.Add(UsageBill);
+                DataProvider.Ins.DB.SaveChanges();
+                
+                DataProvider.Ins.DB.CT_PHIEUDICHVU.AddRange(SelectedServices);
+                DataProvider.Ins.DB.SaveChanges();
+
+                // Chưa trừ số lượng tồn kho
+                DataProvider.Ins.DB.CT_PHIEUHANGHOA.AddRange(SelectedCommoditys);
+                DataProvider.Ins.DB.SaveChanges();
+
                 DataProvider.Ins.DB.PHIEUDATPHONGs.Add(ReservationBill);
                 DataProvider.Ins.DB.SaveChanges();
+
+                p.Close();
             });
         }
 
         public void UpdateFee(ObservableCollection<CT_PHIEUDICHVU> ct_PHIEUDICHVUs, ObservableCollection<CT_PHIEUHANGHOA> ct_PHIEUHANGHOAs)
         {
+            // Tổng tiền dịch vụ/hàng hóa
             int servicesFee = 0;
             foreach (var item in ct_PHIEUDICHVUs) { servicesFee += (int)item.ThanhTien; }
             foreach (var item in ct_PHIEUHANGHOAs) { servicesFee += (int)item.ThanhTien; }
             ServicesFee = servicesFee.ToString();
 
+            // Tổng tiền phòng + dịch vụ
             int sumFee = servicesFee + int.Parse(RoomFee);
             SumFee = sumFee.ToString();
 
@@ -601,10 +671,14 @@ namespace Hotel_Management_System.ViewModel.BookingRoomViewModel
             int downPayment;
             try { discount = int.Parse(Discount); } catch { discount = 0; };
             try { downPayment = int.Parse(DownPayment); } catch { downPayment = 0; };
-
+            
+            // Tổng tiền giảm giá + tiền cọc
             int completelyPayment = discount + downPayment;
             CompletelyPayment = completelyPayment.ToString();
-            int remainingCosts = sumFee - completelyPayment;
+
+            // Tổng tiền còn lại phải thanh toán
+            int remainingCosts = 0;
+            if (sumFee > completelyPayment) remainingCosts = sumFee - completelyPayment;
             RemainingCosts = remainingCosts.ToString();
         }
 

@@ -186,7 +186,12 @@ namespace Hotel_Management_System.ViewModel.RoomMapViewModel
             { 
                 BookingRoomView bookingRoomView = new BookingRoomView();
                 bookingRoomView.DataContext = new BookingRoomViewModel.BookingRoomViewModel(p);
-                bookingRoomView.ShowDialog(); 
+                bookingRoomView.ShowDialog();
+
+                if (bookingRoomView.DataContext == null) return;
+                var bookingRoomViewModel = bookingRoomView.DataContext as BookingRoomViewModel.BookingRoomViewModel;
+
+                p.TrangThai = bookingRoomViewModel.Room.TrangThai;
             });
         }
     }
