@@ -49,6 +49,7 @@
     <Property Name="MaPhieuNhapHang" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="MaHangHoa" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="SoLuong" Type="smallint" />
+    <Property Name="DonGia" Type="int" />
     <Property Name="ThanhTien" Type="int" />
   </EntityType>
   <EntityType Name="DICHVU">
@@ -59,7 +60,7 @@
     <Property Name="TenDichVu" Type="nvarchar" MaxLength="50" />
     <Property Name="DonViTinh" Type="nvarchar" MaxLength="20" />
     <Property Name="DonGia" Type="int" />
-    <Property Name="TrangThai" Type="varchar" MaxLength="30" />
+    <Property Name="TrangThai" Type="nvarchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="HANGHOA">
     <Key>
@@ -68,7 +69,7 @@
     <Property Name="MaHangHoa" Type="nvarchar" MaxLength="10" Nullable="false" />
     <Property Name="TenHangHoa" Type="nvarchar" MaxLength="50" />
     <Property Name="TonKho" Type="smallint" />
-    <Property Name="DonVITinh" Type="nvarchar" MaxLength="20" />
+    <Property Name="DonViTinh" Type="nvarchar" MaxLength="20" />
     <Property Name="DonGiaNhap" Type="int" />
     <Property Name="DonGiaBan" Type="int" />
     <Property Name="TrangThai" Type="nvarchar" MaxLength="30" />
@@ -82,7 +83,7 @@
     <Property Name="MaKhachHang" Type="nvarchar" MaxLength="10" />
     <Property Name="TriGia" Type="int" />
     <Property Name="NgayLap" Type="datetime" />
-    <Property Name="TrangThai" Type="varchar" MaxLength="30" />
+    <Property Name="TrangThai" Type="nvarchar" MaxLength="30" />
   </EntityType>
   <EntityType Name="KHACHHANG">
     <Key>

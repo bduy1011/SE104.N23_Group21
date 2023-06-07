@@ -11,7 +11,7 @@ namespace Hotel_Management_System.Model
 {
     using Hotel_Management_System.ViewModel.Other;
     using System;
-    
+
     public partial class CT_PHIEUHANGHOA : BaseViewModel
     {
         public CT_PHIEUHANGHOA()

@@ -11,7 +11,7 @@ namespace Hotel_Management_System.Model
 {
     using System;
     using System.Collections.Generic;
-    
+
     public partial class PHIEUNHAPHANG
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -19,12 +19,12 @@ namespace Hotel_Management_System.Model
         {
             this.CT_PHIEUNHAPHANG = new HashSet<CT_PHIEUNHAPHANG>();
         }
-    
+
         public string MaPhieuNhapHang { get; set; }
         public string MaNhanVien { get; set; }
         public DateTime? NgayLap { get; set; }
         public int? TriGia { get; set; }
-    
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CT_PHIEUNHAPHANG> CT_PHIEUNHAPHANG { get; set; }
         public virtual NHANVIEN NHANVIEN { get; set; }

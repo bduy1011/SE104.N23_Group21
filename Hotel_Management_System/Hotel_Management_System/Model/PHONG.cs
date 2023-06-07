@@ -33,37 +33,38 @@ namespace Hotel_Management_System.Model
         }
 
         private string _maPhong;
-        public string MaPhong 
+        public string MaPhong
         {
             get { return _maPhong; }
-            set { _maPhong = value; OnPropertyChanged(); } 
+            set { _maPhong = value; OnPropertyChanged(); }
         }
-        
+
         private string _maLoaiPhong;
-        public string MaLoaiPhong 
+        public string MaLoaiPhong
         {
             get { return _maLoaiPhong; }
-            set { _maLoaiPhong = value; OnPropertyChanged(); } 
+            set { _maLoaiPhong = value; OnPropertyChanged(); }
         }
-        
+
         private string _trangThai;
-        public string TrangThai 
+        public string TrangThai
         {
-            get { return _trangThai; } 
-            set { _trangThai = value; OnPropertyChanged(); } 
+            get { return _trangThai; }
+            set { _trangThai = value; OnPropertyChanged(); }
         }
-        
+
         private string _ghiChu;
-        public string GhiChu 
+        public string GhiChu
         {
             get { return _ghiChu; }
-            set { _ghiChu = value; OnPropertyChanged(); } }
-        
+            set { _ghiChu = value; OnPropertyChanged(); }
+        }
+
         private string _stateColor;
-        public string StateColor 
+        public string StateColor
         {
             get { return _stateColor; }
-            set { _stateColor = value; OnPropertyChanged(); } 
+            set { _stateColor = value; OnPropertyChanged(); }
         }
 
         public virtual LOAIPHONG LOAIPHONG { get; set; }

@@ -47,6 +47,7 @@
     <Property Name="MaPhieuNhapHang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="MaHangHoa" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="SoLuong" Type="Int16" />
+    <Property Name="DonGia" Type="Int32" />
     <Property Name="ThanhTien" Type="Int32" />
     <NavigationProperty Name="HANGHOA" Relationship="Self.FK_CTPNH_HH" FromRole="CT_PHIEUNHAPHANG" ToRole="HANGHOA" />
     <NavigationProperty Name="PHIEUNHAPHANG" Relationship="Self.FK_CTPNH_PNH" FromRole="CT_PHIEUNHAPHANG" ToRole="PHIEUNHAPHANG" />
@@ -59,7 +60,7 @@
     <Property Name="TenDichVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DonViTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="DonGia" Type="Int32" />
-    <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="CT_PHIEUDICHVU" Relationship="Self.FK_CTPDV_DV" FromRole="DICHVU" ToRole="CT_PHIEUDICHVU" />
   </EntityType>
   <EntityType Name="HANGHOA">
@@ -69,12 +70,12 @@
     <Property Name="MaHangHoa" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="TenHangHoa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="TonKho" Type="Int16" />
-    <Property Name="DonViTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="DonGiaNhap" Type="Int32" />
     <Property Name="DonGiaBan" Type="Int32" />
     <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="CT_PHIEUHANGHOA" Relationship="Self.FK_CTPHH_HH" FromRole="HANGHOA" ToRole="CT_PHIEUHANGHOA" />
     <NavigationProperty Name="CT_PHIEUNHAPHANG" Relationship="Self.FK_CTPNH_HH" FromRole="HANGHOA" ToRole="CT_PHIEUNHAPHANG" />
+    <Property Name="DonViTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="HOADON">
     <Key>
@@ -85,7 +86,7 @@
     <Property Name="MaKhachHang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
     <Property Name="TriGia" Type="Int32" />
     <Property Name="NgayLap" Type="DateTime" Precision="3" />
-    <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="CT_HOADON" Relationship="Self.FK_CTHD_HD" FromRole="HOADON" ToRole="CT_HOADON" />
     <NavigationProperty Name="KHACHHANG" Relationship="Self.FK_HD_KH" FromRole="HOADON" ToRole="KHACHHANG" />
     <NavigationProperty Name="NHANVIEN" Relationship="Self.FK_HD_NV" FromRole="HOADON" ToRole="NHANVIEN" />

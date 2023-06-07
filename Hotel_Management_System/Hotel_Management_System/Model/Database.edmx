@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="QL_KSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="QL_KSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CT_HOADON">
           <Key>
             <PropertyRef Name="MaHoaDon" />
@@ -54,6 +54,7 @@
           <Property Name="MaPhieuNhapHang" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="MaHangHoa" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="SoLuong" Type="smallint" />
+          <Property Name="DonGia" Type="int" />
           <Property Name="ThanhTien" Type="int" />
         </EntityType>
         <EntityType Name="DICHVU">
@@ -64,7 +65,7 @@
           <Property Name="TenDichVu" Type="nvarchar" MaxLength="50" />
           <Property Name="DonViTinh" Type="nvarchar" MaxLength="20" />
           <Property Name="DonGia" Type="int" />
-          <Property Name="TrangThai" Type="varchar" MaxLength="30" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="HANGHOA">
           <Key>
@@ -73,7 +74,7 @@
           <Property Name="MaHangHoa" Type="nvarchar" MaxLength="10" Nullable="false" />
           <Property Name="TenHangHoa" Type="nvarchar" MaxLength="50" />
           <Property Name="TonKho" Type="smallint" />
-          <Property Name="DonVITinh" Type="nvarchar" MaxLength="20" />
+          <Property Name="DonViTinh" Type="nvarchar" MaxLength="20" />
           <Property Name="DonGiaNhap" Type="int" />
           <Property Name="DonGiaBan" Type="int" />
           <Property Name="TrangThai" Type="nvarchar" MaxLength="30" />
@@ -87,7 +88,7 @@
           <Property Name="MaKhachHang" Type="nvarchar" MaxLength="10" />
           <Property Name="TriGia" Type="int" />
           <Property Name="NgayLap" Type="datetime" />
-          <Property Name="TrangThai" Type="varchar" MaxLength="30" />
+          <Property Name="TrangThai" Type="nvarchar" MaxLength="30" />
         </EntityType>
         <EntityType Name="KHACHHANG">
           <Key>
@@ -470,8 +471,7 @@
             <End Role="THONGKE" EntitySet="THONGKE" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QL_KSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -522,6 +522,7 @@
           <Property Name="MaPhieuNhapHang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="MaHangHoa" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SoLuong" Type="Int16" />
+          <Property Name="DonGia" Type="Int32" />
           <Property Name="ThanhTien" Type="Int32" />
           <NavigationProperty Name="HANGHOA" Relationship="Self.FK_CTPNH_HH" FromRole="CT_PHIEUNHAPHANG" ToRole="HANGHOA" />
           <NavigationProperty Name="PHIEUNHAPHANG" Relationship="Self.FK_CTPNH_PNH" FromRole="CT_PHIEUNHAPHANG" ToRole="PHIEUNHAPHANG" />
@@ -534,7 +535,7 @@
           <Property Name="TenDichVu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="DonViTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="DonGia" Type="Int32" />
-          <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CT_PHIEUDICHVU" Relationship="Self.FK_CTPDV_DV" FromRole="DICHVU" ToRole="CT_PHIEUDICHVU" />
         </EntityType>
         <EntityType Name="HANGHOA">
@@ -544,12 +545,12 @@
           <Property Name="MaHangHoa" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="TenHangHoa" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="TonKho" Type="Int16" />
-          <Property Name="DonViTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="DonGiaNhap" Type="Int32" />
           <Property Name="DonGiaBan" Type="Int32" />
           <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CT_PHIEUHANGHOA" Relationship="Self.FK_CTPHH_HH" FromRole="HANGHOA" ToRole="CT_PHIEUHANGHOA" />
           <NavigationProperty Name="CT_PHIEUNHAPHANG" Relationship="Self.FK_CTPNH_HH" FromRole="HANGHOA" ToRole="CT_PHIEUNHAPHANG" />
+          <Property Name="DonViTinh" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="HOADON">
           <Key>
@@ -560,7 +561,7 @@
           <Property Name="MaKhachHang" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="TriGia" Type="Int32" />
           <Property Name="NgayLap" Type="DateTime" Precision="3" />
-          <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="TrangThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="CT_HOADON" Relationship="Self.FK_CTHD_HD" FromRole="HOADON" ToRole="CT_HOADON" />
           <NavigationProperty Name="KHACHHANG" Relationship="Self.FK_HD_KH" FromRole="HOADON" ToRole="KHACHHANG" />
           <NavigationProperty Name="NHANVIEN" Relationship="Self.FK_HD_NV" FromRole="HOADON" ToRole="NHANVIEN" />
@@ -984,6 +985,7 @@
                 <ScalarProperty Name="MaPhieuNhapHang" ColumnName="MaPhieuNhapHang" />
                 <ScalarProperty Name="MaHangHoa" ColumnName="MaHangHoa" />
                 <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+                <ScalarProperty Name="DonGia" ColumnName="DonGia" />
                 <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1002,10 +1004,10 @@
           <EntitySetMapping Name="HANGHOAs">
             <EntityTypeMapping TypeName="QL_KSModel.HANGHOA">
               <MappingFragment StoreEntitySet="HANGHOA">
+                <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
                 <ScalarProperty Name="MaHangHoa" ColumnName="MaHangHoa" />
                 <ScalarProperty Name="TenHangHoa" ColumnName="TenHangHoa" />
                 <ScalarProperty Name="TonKho" ColumnName="TonKho" />
-                <ScalarProperty Name="DonViTinh" ColumnName="DonVITinh" />
                 <ScalarProperty Name="DonGiaNhap" ColumnName="DonGiaNhap" />
                 <ScalarProperty Name="DonGiaBan" ColumnName="DonGiaBan" />
                 <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />

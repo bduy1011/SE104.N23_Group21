@@ -34,14 +34,14 @@ namespace Hotel_Management_System.Model
         public int? TriGia
         {
             get { return _triGia; }
-            set { _triGia = value; OnPropertyChanged(); } 
+            set { _triGia = value; OnPropertyChanged(); }
         }
 
         private DateTime? _ngayLap;
         public DateTime? NgayLap
         {
             get { return _ngayLap; }
-            set { _ngayLap = value; OnPropertyChanged(); } 
+            set { _ngayLap = value; OnPropertyChanged(); }
         }
 
         private string _trangThai;

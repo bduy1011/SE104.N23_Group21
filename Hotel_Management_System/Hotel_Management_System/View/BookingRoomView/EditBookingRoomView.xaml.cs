@@ -5,11 +5,11 @@ using System.Windows.Input;
 namespace Hotel_Management_System.View.BookingRoomView
 {
     /// <summary>
-    /// Interaction logic for BookingRoomView.xaml
+    /// Interaction logic for EditBookingRoomView.xaml
     /// </summary>
-    public partial class BookingRoomView : Window
+    public partial class EditBookingRoomView : Window
     {
-        public BookingRoomView()
+        public EditBookingRoomView()
         {
             InitializeComponent();
         }

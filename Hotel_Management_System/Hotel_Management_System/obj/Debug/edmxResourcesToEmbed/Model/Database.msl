@@ -40,6 +40,7 @@
           <ScalarProperty Name="MaPhieuNhapHang" ColumnName="MaPhieuNhapHang" />
           <ScalarProperty Name="MaHangHoa" ColumnName="MaHangHoa" />
           <ScalarProperty Name="SoLuong" ColumnName="SoLuong" />
+          <ScalarProperty Name="DonGia" ColumnName="DonGia" />
           <ScalarProperty Name="ThanhTien" ColumnName="ThanhTien" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -58,10 +59,10 @@
     <EntitySetMapping Name="HANGHOAs">
       <EntityTypeMapping TypeName="QL_KSModel.HANGHOA">
         <MappingFragment StoreEntitySet="HANGHOA">
+          <ScalarProperty Name="DonViTinh" ColumnName="DonViTinh" />
           <ScalarProperty Name="MaHangHoa" ColumnName="MaHangHoa" />
           <ScalarProperty Name="TenHangHoa" ColumnName="TenHangHoa" />
           <ScalarProperty Name="TonKho" ColumnName="TonKho" />
-          <ScalarProperty Name="DonViTinh" ColumnName="DonVITinh" />
           <ScalarProperty Name="DonGiaNhap" ColumnName="DonGiaNhap" />
           <ScalarProperty Name="DonGiaBan" ColumnName="DonGiaBan" />
           <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />

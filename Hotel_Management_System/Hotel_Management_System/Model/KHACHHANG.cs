@@ -24,86 +24,86 @@ namespace Hotel_Management_System.Model
         }
 
         private string _character;
-        public string Character 
+        public string Character
         {
             get { return _character; }
-            set { _character = value; OnPropertyChanged(); } 
+            set { _character = value; OnPropertyChanged(); }
         }
 
         private Brush _bgColor;
-        public Brush BgColor 
+        public Brush BgColor
         {
-            get { return _bgColor; } 
-            set { _bgColor = value; OnPropertyChanged(); } 
+            get { return _bgColor; }
+            set { _bgColor = value; OnPropertyChanged(); }
         }
-        
+
         private int _stt;
-        public int STT 
+        public int STT
         {
             get { return _stt; }
-            set { _stt = value; OnPropertyChanged(); } 
+            set { _stt = value; OnPropertyChanged(); }
         }
         private string _maKhachHang;
-        public string MaKhachHang 
+        public string MaKhachHang
         {
             get { return _maKhachHang; }
-            set { _maKhachHang = value; OnPropertyChanged(); } 
+            set { _maKhachHang = value; OnPropertyChanged(); }
         }
 
         private string _tenKhachHang;
-        public string TenKhachHang 
+        public string TenKhachHang
         {
             get { return _tenKhachHang; }
-            set { _tenKhachHang = value; OnPropertyChanged(); } 
+            set { _tenKhachHang = value; OnPropertyChanged(); }
         }
 
         private string _CCCD;
-        public string CCCD 
+        public string CCCD
         {
             get { return _CCCD; }
-            set { _CCCD = value; OnPropertyChanged(); } 
+            set { _CCCD = value; OnPropertyChanged(); }
         }
 
         private string _gioiTinh;
-        public string GioiTinh 
+        public string GioiTinh
         {
-            get { return _gioiTinh; } 
-            set { _gioiTinh = value; OnPropertyChanged(); } 
+            get { return _gioiTinh; }
+            set { _gioiTinh = value; OnPropertyChanged(); }
         }
 
         private DateTime? _ngaySinh;
-        public DateTime? NgaySinh 
+        public DateTime? NgaySinh
         {
             get { return _ngaySinh; }
-            set { _ngaySinh = value; OnPropertyChanged(); } 
+            set { _ngaySinh = value; OnPropertyChanged(); }
         }
-        
+
         private string _soDienThoai;
-        public string SoDienThoai 
+        public string SoDienThoai
         {
-            get { return _soDienThoai; } 
-            set { _soDienThoai = value; OnPropertyChanged(); } 
+            get { return _soDienThoai; }
+            set { _soDienThoai = value; OnPropertyChanged(); }
         }
 
         private string _loaiKhachHang;
-        public string LoaiKhachHang 
+        public string LoaiKhachHang
         {
             get { return _loaiKhachHang; }
-            set { _loaiKhachHang = value; OnPropertyChanged(); } 
+            set { _loaiKhachHang = value; OnPropertyChanged(); }
         }
 
         private string _trangThai;
-        public string TrangThai 
+        public string TrangThai
         {
             get { return _trangThai; }
-            set { _trangThai = value; OnPropertyChanged(); } 
+            set { _trangThai = value; OnPropertyChanged(); }
         }
 
         private bool _isLastRow;
-        public bool IsLastRow 
+        public bool IsLastRow
         {
             get { return _isLastRow; }
-            set { _isLastRow = value; OnPropertyChanged(); } 
+            set { _isLastRow = value; OnPropertyChanged(); }
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -54,14 +54,14 @@ namespace Hotel_Management_System.Model
         public DateTime? NgayDen
         {
             get { return _ngayDen; }
-            set { _ngayDen = value; OnPropertyChanged(); } 
+            set { _ngayDen = value; OnPropertyChanged(); }
         }
 
         private DateTime? _ngayDi;
         public DateTime? NgayDi
         {
             get { return _ngayDi; }
-            set { _ngayDi = value; OnPropertyChanged(); } 
+            set { _ngayDi = value; OnPropertyChanged(); }
         }
         private int? _donGia;
         public int? DonGia
@@ -74,7 +74,7 @@ namespace Hotel_Management_System.Model
         public int? TienCoc
         {
             get { return _tienCoc; }
-            set { _tienCoc = value; OnPropertyChanged(); } 
+            set { _tienCoc = value; OnPropertyChanged(); }
         }
 
         private DateTime? _ngayLap;

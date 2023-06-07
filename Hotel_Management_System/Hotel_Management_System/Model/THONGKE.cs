@@ -10,7 +10,7 @@
 namespace Hotel_Management_System.Model
 {
     using System;
-    
+
     public partial class THONGKE
     {
         public string MaThongKe { get; set; }
@@ -18,7 +18,7 @@ namespace Hotel_Management_System.Model
         public DateTime? NgayLap { get; set; }
         public double? DoanhThu { get; set; }
         public double? TiLe { get; set; }
-    
+
         public virtual LOAIPHONG LOAIPHONG { get; set; }
     }
 }
